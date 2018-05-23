@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -67,4 +68,51 @@ public class News {
 	}
 	public static void removeArticleByIndex(int index) { articles.remove(index); }
 	public static void removeAllArticle() { articles.clear(); }
+	
+	public static List<Article> findArticlesByAuthor(String author) {
+		List<Article> resultArticles = new Vector<Article>();
+		Iterator<Article> iterator = articles.iterator();
+		while(iterator.hasNext()) {
+			Article article = (Article)iterator.next();
+			List<String> authors = article.getAuthors();
+			Iterator<String> authorIterator = authors.iterator();
+			while(authorIterator.hasNext()) {
+				if (authorIterator.next().equals(author)) {
+					resultArticles.add(article);
+					break;
+				}
+			}
+		}
+		return resultArticles;
+	}
+	
+	public static List<Article> findArticlesByPeriod(Date startDate, Date endDate) {
+		List<Article> resultArticles = new Vector<Article>();
+		Iterator<Article> iterator = articles.iterator();
+		while(iterator.hasNext()) {
+			Article article = (Article)iterator.next();
+			if (startDate.getTime() <= article.getPublishDate().getTime() &&
+				endDate.getTime() >= article.getPublishDate().getTime()) {
+				resultArticles.add(article);
+			}
+		}
+		return resultArticles;
+	}
+	
+	public static List<Article> findArticlesByKeyword(String keyword) {
+		List<Article> resultArticles = new Vector<Article>();
+		Iterator<Article> iterator = articles.iterator();
+		while(iterator.hasNext()) {
+			Article article = (Article)iterator.next();
+			List<String> keywords = article.getKeywords();
+			Iterator<String> keywordIterator = keywords.iterator();
+			while(keywordIterator.hasNext()) {
+				if (keywordIterator.next().equals(keyword)) {
+					resultArticles.add(article);
+					break;
+				}
+			}
+		}
+		return resultArticles;
+	}
 }

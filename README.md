@@ -40,6 +40,15 @@ Request Body :
 ### Display all articles (GET METHOD)
 * http://localhost:8080/article/list
 
+### Display all articles for a given author
+* http://localhost:8080/article/author/hong
+
+### Display all articles for a given period
+* http://localhost:8080/article/period?startDate=2018-05-20&endDate=2018-05-24
+
+### Find all articles for a specific keyword
+* http://localhost:8080/article/keyword/test
+
 ### Modify specific article (PUT METHOD)
 * http://localhost:3000/article/1
 
